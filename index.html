@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gastos Familiares</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>💰 Gastos Familiares</h1>
+      <div class="month-nav">
+        <button id="prevMonth" class="icon-btn" aria-label="Mes anterior">‹</button>
+        <span id="currentMonthLabel" class="month-label"></span>
+        <button id="nextMonth" class="icon-btn" aria-label="Mes siguiente">›</button>
+      </div>
+    </header>
+
+    <section class="summary-cards">
+      <div class="card">
+        <span class="card-label">Total del mes</span>
+        <span class="card-value" id="totalMes">$0</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Presupuesto</span>
+        <span class="card-value">
+          <input type="number" id="presupuestoInput" placeholder="0" min="0" step="0.01">
+        </span>
+      </div>
+      <div class="card" id="restanteCard">
+        <span class="card-label">Restante</span>
+        <span class="card-value" id="restanteMes">$0</span>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <div class="panel">
+        <h2>Agregar gasto</h2>
+        <form id="expenseForm" class="expense-form">
+          <div class="field">
+            <label for="descripcion">Descripción</label>
+            <input type="text" id="descripcion" placeholder="Ej. Supermercado" required>
+          </div>
+          <div class="field">
+            <label for="monto">Monto</label>
+            <input type="number" id="monto" placeholder="0.00" min="0" step="0.01" required>
+          </div>
+          <div class="field">
+            <label for="categoria">Categoría</label>
+            <select id="categoria">
+              <option>Alimentación</option>
+              <option>Vivienda</option>
+              <option>Transporte</option>
+              <option>Salud</option>
+              <option>Educación</option>
+              <option>Entretenimiento</option>
+              <option>Servicios</option>
+              <option>Ropa</option>
+              <option>Otros</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="miembro">Miembro</label>
+            <input type="text" id="miembro" placeholder="Ej. Mamá" list="miembrosList">
+            <datalist id="miembrosList"></datalist>
+          </div>
+          <div class="field">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" required>
+          </div>
+          <button type="submit" class="btn-primary">Agregar gasto</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Gastos por categoría</h2>
+        <div id="categoryBreakdown" class="category-breakdown">
+          <p class="empty-msg">Sin gastos registrados este mes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Historial de gastos</h2>
+        <div class="filters">
+          <select id="filterCategoria">
+            <option value="">Todas las categorías</option>
+          </select>
+          <select id="filterMiembro">
+            <option value="">Todos los miembros</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="expenseTable">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Descripción</th>
+              <th>Categoría</th>
+              <th>Miembro</th>
+              <th>Monto</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="expenseTableBody"></tbody>
+        </table>
+        <p id="emptyTableMsg" class="empty-msg" hidden>No hay gastos registrados este mes.</p>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <button id="exportBtn" class="btn-secondary">Exportar CSV</button>
+      <button id="clearMonthBtn" class="btn-danger">Borrar gastos del mes</button>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
